@@ -2,7 +2,7 @@
   "name": "task-flow",
   "private": true,
   "scripts": {
-    "dev": "bun run --parallel dev:*",
+    "dev": "bun run --parallel dev:client dev:server",
     "dev:client": "bun run --cwd client dev",
     "dev:server": "bun run --cwd server dev",
     "install:all": "bun install --cwd client && bun install --cwd server"
