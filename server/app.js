@@ -1,17 +1,15 @@
 import { createServer } from "http";
+import express from "express";
 import { intializeApp } from "./config/server";
 import { initSocket } from "./config/socket";
-import { config } from "dotenv";
 import { initializeDb } from "./data/db";
+import dotenvConfig from "./config/dotenv";
 
-config();
-
-const PORT = process.env.PORT;
-const DB_URL = process.env.DB_URL;
+const PORT = dotenvConfig.PORT;
 
 const startApp = async () => {
   try {
-    await initializeDb(DB_URL);
+    await initializeDb();
 
     const app = intializeApp();
 
@@ -20,7 +18,7 @@ const startApp = async () => {
     initSocket(httpServer);
 
     httpServer.listen(PORT, () =>
-      console.log(`Serve listening at port: ${PORT}`),
+      console.log(`Server listening at port: ${PORT}`),
     );
   } catch (err) {
     console.log("Failed to start the server");
